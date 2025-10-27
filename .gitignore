@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # Personal key file
-mcp.json
+.vscode/mcp.json
