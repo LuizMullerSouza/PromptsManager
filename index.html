@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <!-- Define o tipo de documento e idioma principal da página -->
     <meta charset="UTF-8" />
+    <!-- Garante que a página será responsiva em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Importação da fonte "Inter" do Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Ícone exibido na aba do navegador -->
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <!-- Importa o arquivo de estilos CSS -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Título exibido na aba do navegador -->
     <title>Prompts Manager</title>
   </head>
   <body>
+    <!-- Estrutura principal do aplicativo -->
     <div class="app">
+      <!-- Botão para abrir o menu lateral -->
       <button class="icon-button open-toggle" id="btn-open">
         <img src="assets/open.svg" alt="Abrir menu" class="icon" />
       </button>
 
+      <!-- Barra lateral -->
       <aside class="sidebar">
+        <!-- Cabeçalho da barra lateral com logo e botão de fechar -->
         <header class="sidebar-header">
           <img src="assets/logo.svg" alt="Logo" class="logo" />
           <button class="icon-button" id="btn-collapse">
@@ -25,7 +35,9 @@
           </button>
         </header>
 
+        <!-- Conteúdo principal da barra lateral -->
         <div class="sidebar-content">
+          <!-- Campo de busca e botão de novo prompt -->
           <div class="search-container">
             <img
               src="assets/search.svg"
@@ -33,6 +45,7 @@
               class="icon search-icon"
             />
 
+            <!-- Campo de entrada para busca de prompts pelo título -->
             <input
               type="text"
               class="search-input"
@@ -40,56 +53,31 @@
               placeholder="Buscar por título"
             />
 
+            <!-- Botão para criar um novo prompt -->
             <button class="btn-primary btn btn-full" id="btn-new">
               Novo Prompt
             </button>
           </div>
 
-          <ul class="prompt-list" id="prompt-list">
-            <li class="prompt-item">
-              <div class="prompt-item-content">
-                <span class="prompt-item-title">Título do Prompt</span>
-                <span class="prompt-item-description"
-                  >Descrição breve do prompt para visualização.</span
-                >
-              </div>
-              <button class="btn-icon" title="Remover">
-                <img
-                  src="assets/remove.svg"
-                  alt="Remover"
-                  class="icon icon-trash"
-                />
-              </button>
-            </li>
-
-            <li class="prompt-item">
-              <div class="prompt-item-content">
-                <span class="prompt-item-title">Título do Prompt</span>
-                <span class="prompt-item-description"
-                  >Descrição breve do prompt para visualização.</span
-                >
-              </div>
-              <button class="btn-icon" title="Remover">
-                <img
-                  src="assets/remove.svg"
-                  alt="Remover"
-                  class="icon icon-trash"
-                />
-              </button>
-            </li>
-          </ul>
+          <!-- Lista onde os prompts serão exibidos -->
+          <ul class="prompt-list" id="prompt-list"></ul>
         </div>
       </aside>
 
+      <!-- Área principal de edição do prompt -->
       <main class="main">
+        <!-- Cabeçalho da área principal com botões de ação -->
         <header class="main-header">
+          <!-- Botão para copiar o conteúdo do prompt -->
           <button id="btn-copy" class="btn-outline btn">
             <img src="assets/copy.svg" alt="Copiar" class="icon" />
             <span>Copiar</span>
           </button>
+          <!-- Botão para salvar o prompt -->
           <button id="btn-save" class="btn-primary btn w-150">Salvar</button>
         </header>
 
+        <!-- Campo editável para o título do prompt -->
         <div
           data-placeholder="Título do prompt"
           class="editable-wrapper"
@@ -102,6 +90,7 @@
           ></h1>
         </div>
 
+        <!-- Campo editável para o conteúdo do prompt -->
         <div
           data-placeholder="Conteúdo do prompt ..."
           class="editable-wrapper"
@@ -115,6 +104,7 @@
         </div>
       </main>
     </div>
+    <!-- Importa o script principal da aplicação -->
     <script src="script.js"></script>
   </body>
 </html>

@@ -17,6 +17,10 @@ const elements = {
   btnCollapse: document.getElementById("btn-collapse"),
   sidebar: document.querySelector(".sidebar"),
   btnSave: document.getElementById("btn-save"),
+  list: document.getElementById("prompt-list"),
+  search: document.getElementById("search-input"),
+  btnNew: document.getElementById("btn-new"),
+  btnCopy: document.getElementById("btn-copy"),
 }
 
 // Atualiza o estado do wrapper conforme o conteúdo do elemento
@@ -27,14 +31,14 @@ function updateEditableWrapperState(element, wrapper) {
 
 // Função para abrir a sidebar
 function openSidebar() {
-  elements.sidebar.style.display = "flex"
-  elements.btnOpen.style.display = "none"
+  elements.sidebar.classList.add("open")
+  elements.sidebar.classList.remove("collapsed")
 }
 
 // Função para fechar a sidebar
 function closeSidebar() {
-  elements.sidebar.style.display = "none"
-  elements.btnOpen.style.display = "block"
+  elements.sidebar.classList.remove("open")
+  elements.sidebar.classList.add("collapsed")
 }
 
 // Atualiza o estado de todos os elementos editáveis
@@ -68,6 +72,12 @@ function save() {
 
   if (state.selectedId) {
     // Editar prompt existente
+    const existingPrompt = state.prompts.find((p) => p.id === state.selectedId)
+
+    if (existingPrompt) {
+      existingPrompt.title = title || "Sem título"
+      existingPrompt.content = content || "Sem conteúdo"
+    }
   } else {
     // Criar novo prompt
     const newPrompt = {
@@ -80,30 +90,133 @@ function save() {
     state.selectedId = newPrompt.id
   }
 
+  renderList(elements.search.value)
   persist()
+  alert("Prompt salvo com sucesso!")
 }
 
 // Função para persistir o estado no localStorage
 function persist() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.prompts))
-    alert("Prompt salvo com sucesso!")
   } catch (error) {
     console.error("Erro ao salvar no localStorage:", error)
   }
 }
 
-// Eventos dos botões
+// Função para carregar o estado do localStorage
+function load() {
+  try {
+    const storage = localStorage.getItem(STORAGE_KEY)
+    state.prompts = storage ? JSON.parse(storage) : []
+    state.selectedId = null
+  } catch (error) {
+    console.error("Erro ao carregar do localStorage:", error)
+  }
+}
+
+// Função para criar o HTML de um item de prompt na lista
+function createPromptItem(prompt) {
+  const tmp = document.createElement("div")
+  tmp.innerHTML = prompt.content
+  return `
+      <li class="prompt-item" data-id="${prompt.id}" data-action="select">
+        <div class="prompt-item-content">
+          <span class="prompt-item-title">${prompt.title}</span>
+          <span class="prompt-item-description">${tmp.textContent}</span>
+        </div>
+      <button class="btn-icon" title="Remover" data-action="remove">
+        <img src="assets/remove.svg" alt="Remover" class="icon icon-trash" />
+      </button>
+      </li>
+  `
+}
+
+// Função para renderizar a lista de prompts
+function renderList(filtertext = "") {
+  const filteredPrompts = state.prompts
+    .filter((prompt) =>
+      prompt.title.toLowerCase().includes(filtertext.toLowerCase().trim())
+    )
+    .map((p) => createPromptItem(p))
+    .join("")
+
+  elements.list.innerHTML = filteredPrompts
+}
+
+// Função para criar um novo prompt
+function newPrompt() {
+  state.selectedId = null
+  elements.promptTitle.textContent = ""
+  elements.promptContent.textContent = ""
+  updateAllEditableStates()
+  elements.promptTitle.focus()
+}
+
+// Função para copiar o conteúdo
+function copySelected() {
+  try {
+    const content = elements.promptContent
+
+    if (!navigator.clipboard) {
+      console.error("Área de trabalho não suportada neste ambiente.")
+      return
+    }
+
+    navigator.clipboard.writeText(content.innerText)
+    alert("Conteúdo copiado para a área de transferência!")
+  } catch (error) {
+    console.error("Erro ao copiar para a área de transferência:", error)
+  }
+}
+
+// Eventos
 elements.btnSave.addEventListener("click", save)
+elements.btnNew.addEventListener("click", newPrompt)
+elements.btnCopy.addEventListener("click", copySelected)
+elements.search.addEventListener("input", function (event) {
+  renderList(event.target.value)
+})
+elements.list.addEventListener("click", function (event) {
+  const removeBtn = event.target.closest("[data-action='remove']")
+  const item = event.target.closest("[data-id]")
+
+  if (!item) return
+
+  const id = item.getAttribute("data-id")
+  state.selectedId = id
+
+  // Remover prompt
+  if (removeBtn) {
+    state.prompts = state.prompts.filter((p) => p.id !== id)
+    renderList(elements.search.value)
+    persist()
+    alert("Prompt removido com sucesso!")
+    return
+  }
+
+  // Selecionar prompt
+  if (event.target.closest("[data-action='select']")) {
+    const prompt = state.prompts.find((p) => p.id === id)
+
+    if (prompt) {
+      elements.promptTitle.textContent = prompt.title
+      elements.promptContent.innerHTML = prompt.content
+      updateAllEditableStates()
+    }
+  }
+})
 
 // Inicialização
 function init() {
+  load()
+  renderList("")
   attachAllEditableHandlers()
   updateAllEditableStates()
 
   // Estado inicial da sidebar
-  elements.sidebar.style.display = ""
-  elements.btnOpen.style.display = "none"
+  elements.sidebar.classList.add("open")
+  elements.sidebar.classList.remove("collapsed")
 
   // Event listeners para abrir ou fechar a sidebar
   elements.btnOpen.addEventListener("click", openSidebar)

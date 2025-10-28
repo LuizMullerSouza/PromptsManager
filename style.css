@@ -1,3 +1,4 @@
+/* Estilos Globais */
 :root {
   --white: #ffffff;
 
@@ -14,41 +15,49 @@
   --gray-100: #737373;
 }
 
+/* Reset e Estilos Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Estilos da Barra de Rolagem Customizada */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
+/* Trilho da Barra de Rolagem */
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
+/* Polegar da Barra de Rolagem */
 ::-webkit-scrollbar-thumb {
   background-color: var(--gray-100);
 }
 
+/* Estilos do Corpo e Fonte */
 body,
 input,
 button {
   font-family: "Inter", sans-serif;
 }
 
+/* Estilos de Layout */
 body {
   background-color: var(--gray-900);
   color: var(--white);
 }
 
+/* Layout do Aplicativo */
 .app {
   display: flex;
   height: 100vh;
   width: 100vw;
 }
 
+/* Estilos do Conteúdo Principal */
 .main {
   display: flex;
   flex-direction: column;
@@ -58,6 +67,7 @@ body {
   overflow-y: scroll;
 }
 
+/* Estilos do Cabeçalho */
 .main-header {
   display: flex;
   justify-content: flex-end;
@@ -66,6 +76,7 @@ body {
   width: 100%;
 }
 
+/* Estilos de Botão */
 .btn {
   gap: 10px;
   height: 44px;
@@ -77,6 +88,7 @@ body {
   cursor: pointer;
 }
 
+/* Estilos de Botão de Contorno */
 .btn-outline {
   background: transparent;
   border: 0.5px solid var(--gray-200);
@@ -85,15 +97,18 @@ body {
   transition: background-color 0.5s;
 }
 
+/* Efeito Hover do Botão de Contorno */
 .btn-outline:hover {
   background-color: var(--gray-200);
 }
 
+/* Estilos de Ícone */
 .icon {
   width: 20px;
   height: 20px;
 }
 
+/* Estilos de Botão Primário */
 .btn-primary {
   background: var(--accent-600);
   border: 1px solid var(--accent-500);
@@ -102,21 +117,25 @@ body {
   transition: opacity 0.5s;
 }
 
+/* Efeito Hover do Botão Primário */
 .btn-primary:hover {
   opacity: 0.8;
 }
 
+/* Estilos de Botão de Largura Total */
 .w-150 {
   width: 150px;
   justify-content: center;
 }
 
+/* Estilos do Editor de Prompt */
 .prompt-title {
   font-weight: 600;
   font-size: 32px;
   outline: none;
 }
 
+/* Estilos do Conteúdo do Prompt */
 .prompt-content {
   font-size: 16px;
   color: var(--white);
@@ -124,10 +143,12 @@ body {
   line-height: 32px;
 }
 
+/* Estilos do Wrapper Editável e Placeholder */
 .editable-wrapper {
   position: relative;
 }
 
+/* Estilos do Placeholder */
 .editable-wrapper::before {
   content: attr(data-placeholder);
   position: absolute;
@@ -136,20 +157,24 @@ body {
   opacity: 0;
 }
 
+/* Mostrar Placeholder Quando Vazio */
 .editable-wrapper.is-empty::before {
   opacity: 1;
 }
 
+/* Estilos Específicos do Placeholder */
 #title-wrapper::before {
   font-weight: 600;
   font-size: 32px;
 }
 
+/* Estilos do Placeholder de Conteúdo */
 #content-wrapper::before {
   font-size: 16px;
   line-height: 32px;
 }
 
+/* Estilos da Sidebar */
 .icon-button {
   padding: 0;
   border: none;
@@ -157,14 +182,20 @@ body {
   cursor: pointer;
 }
 
+/* Estilos da Sidebar e Toggle */
 .open-toggle {
-  position: absolute;
-  top: 62px;
-  left: 62px;
-  display: none;
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 0;
+  background: var(--gray-800);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
+/* Estilos da Sidebar */
 .sidebar {
+  z-index: 1000;
   width: 400px;
   height: 100vh;
   display: flex;
@@ -173,19 +204,32 @@ body {
   padding: 32px;
   background-color: var(--gray-800);
   border-right: 0.5px solid var(--gray-700);
+  min-width: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s;
 }
 
+/* Estilos da Sidebar Recolhida */
+.sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateX(0);
+}
+
+/* Estilos do Cabeçalho da Sidebar */
 .sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* Estilos do Conteúdo da Sidebar */
 .sidebar-content {
   display: flex;
   flex-direction: column;
 }
 
+/* Estilos do Contêiner de Busca */
 .search-container {
   display: flex;
   flex-direction: column;
@@ -196,6 +240,7 @@ body {
   gap: 20px;
 }
 
+/* Estilos do Ícone de Busca */
 .search-icon {
   position: absolute;
   left: 16px;
@@ -203,6 +248,7 @@ body {
   transform: translateY(-50%);
 }
 
+/* Estilos do Input de Busca */
 .search-input {
   background: transparent;
   height: 44px;
@@ -215,19 +261,23 @@ body {
   padding-left: 48px;
 }
 
+/* Estilos do Placeholder do Input de Busca */
 .search-input::placeholder {
   color: var(--gray-200);
 }
 
+/* Estilos de Botão de Largura Total */
 .btn-full {
   width: 100%;
   justify-content: center;
 }
 
+/* Estilos da Logo */
 .logo {
   height: 24px;
 }
 
+/* Estilos do Item de Prompt */
 .prompt-item {
   display: flex;
   align-items: center;
@@ -237,6 +287,7 @@ body {
   margin-top: 20px;
 }
 
+/* Estilos do Conteúdo do Item de Prompt */
 .prompt-item-content {
   display: flex;
   flex-direction: column;
@@ -245,6 +296,7 @@ body {
   flex: 1;
 }
 
+/* Estilos do Título do Item de Prompt */
 .prompt-item-title {
   font-size: 14px;
   font-weight: 500;
@@ -254,6 +306,7 @@ body {
   text-overflow: ellipsis;
 }
 
+/* Estilos da Descrição do Item de Prompt */
 .prompt-item-description {
   font-size: 12px;
   color: var(--gray-100);
@@ -262,6 +315,7 @@ body {
   text-overflow: ellipsis;
 }
 
+/* Estilos do Ícone de Botão */
 .btn-icon {
   background: none;
   border: none;
@@ -276,11 +330,42 @@ body {
   width: 32px;
 }
 
+/* Efeito Hover do Ícone de Botão */
 .btn-icon:hover {
   background: var(--alert-800);
 }
 
+/* Estilos do Ícone de Lixeira */
 .icon-trash {
   width: 20px;
   height: 20px;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 950px) {
+  .open-toggle {
+    display: block;
+    top: 38px;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 80%;
+    max-width: 360px;
+    transform: translateX(-100%);
+    z-index: 1100;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main {
+    padding: 24px 32px;
+    margin-left: 0;
+    overflow-y: auto;
+  }
 }
