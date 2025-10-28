@@ -1,3 +1,12 @@
+// Chave para identificação dos dados no localStorage
+const STORAGE_KEY = "prompts_storage"
+
+// Estado para carregar dados do localStorage
+const state = {
+  prompts: [],
+  selectedId: null,
+}
+
 // Seletores dos elementos HTML por ID
 const elements = {
   promptTitle: document.getElementById("prompt-title"),
@@ -7,6 +16,7 @@ const elements = {
   btnOpen: document.getElementById("btn-open"),
   btnCollapse: document.getElementById("btn-collapse"),
   sidebar: document.querySelector(".sidebar"),
+  btnSave: document.getElementById("btn-save"),
 }
 
 // Atualiza o estado do wrapper conforme o conteúdo do elemento
@@ -42,6 +52,49 @@ function attachAllEditableHandlers() {
     updateEditableWrapperState(elements.promptContent, elements.contentWrapper)
   })
 }
+
+// Função para salvar os dados
+function save() {
+  const title = elements.promptTitle.textContent.trim()
+  const content = elements.promptContent.innerHTML.trim()
+  const hasContent = elements.promptContent.textContent.trim()
+
+  if (!title || !hasContent) {
+    alert(
+      "Por favor, preencha tanto o título quanto o conteúdo do prompt antes de salvar."
+    )
+    return
+  }
+
+  if (state.selectedId) {
+    // Editar prompt existente
+  } else {
+    // Criar novo prompt
+    const newPrompt = {
+      id: Date.now().toString(36),
+      title,
+      content,
+    }
+
+    state.prompts.unshift(newPrompt)
+    state.selectedId = newPrompt.id
+  }
+
+  persist()
+}
+
+// Função para persistir o estado no localStorage
+function persist() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.prompts))
+    alert("Prompt salvo com sucesso!")
+  } catch (error) {
+    console.error("Erro ao salvar no localStorage:", error)
+  }
+}
+
+// Eventos dos botões
+elements.btnSave.addEventListener("click", save)
 
 // Inicialização
 function init() {

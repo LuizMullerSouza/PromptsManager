@@ -22,28 +22,62 @@
           <img src="assets/logo.svg" alt="Logo" class="logo" />
           <button class="icon-button" id="btn-collapse">
             <img src="assets/collapse.svg" alt="Fechar menu" class="icon" />
+          </button>
         </header>
 
         <div class="sidebar-content">
           <div class="search-container">
-            <img 
-              src="assets/search.svg" 
-              alt="Buscar" 
-              class="icon search-icon" 
+            <img
+              src="assets/search.svg"
+              alt="Buscar"
+              class="icon search-icon"
             />
 
-            <input 
-              type="text" 
-              class="search-input" 
-              id= "search-input" 
-              placeholder="Buscar por título" 
+            <input
+              type="text"
+              class="search-input"
+              id="search-input"
+              placeholder="Buscar por título"
             />
-            
+
             <button class="btn-primary btn btn-full" id="btn-new">
               Novo Prompt
             </button>
           </div>
-          
+
+          <ul class="prompt-list" id="prompt-list">
+            <li class="prompt-item">
+              <div class="prompt-item-content">
+                <span class="prompt-item-title">Título do Prompt</span>
+                <span class="prompt-item-description"
+                  >Descrição breve do prompt para visualização.</span
+                >
+              </div>
+              <button class="btn-icon" title="Remover">
+                <img
+                  src="assets/remove.svg"
+                  alt="Remover"
+                  class="icon icon-trash"
+                />
+              </button>
+            </li>
+
+            <li class="prompt-item">
+              <div class="prompt-item-content">
+                <span class="prompt-item-title">Título do Prompt</span>
+                <span class="prompt-item-description"
+                  >Descrição breve do prompt para visualização.</span
+                >
+              </div>
+              <button class="btn-icon" title="Remover">
+                <img
+                  src="assets/remove.svg"
+                  alt="Remover"
+                  class="icon icon-trash"
+                />
+              </button>
+            </li>
+          </ul>
         </div>
       </aside>
 
@@ -61,9 +95,11 @@
           class="editable-wrapper"
           id="title-wrapper"
         >
-          <h1 id="prompt-title" class="prompt-title" contenteditable="true">
-            🐋 Estudar Docker para o final de semana
-          </h1>
+          <h1
+            id="prompt-title"
+            class="prompt-title"
+            contenteditable="true"
+          ></h1>
         </div>
 
         <div
@@ -75,13 +111,7 @@
             id="prompt-content"
             class="prompt-content"
             contenteditable="true"
-          >
-            Aqui serão guardados os prompts para aprender Docker.<br />
-            Docker é uma plataforma de código aberto que permite aos desenvolvedores empacotar aplicativos 
-            e suas dependências em unidades chamadas contêineres. Esses contêineres são ambientes isolados 
-            que podem ser executados de forma consistente em qualquer sistema, facilitando a criação, o teste 
-            e a implantação de aplicativos.
-          </div>
+          ></div>
         </div>
       </main>
     </div>
