@@ -139,13 +139,47 @@ body {
   opacity: 1;
 }
 
-#tittle-wrapper.is-empty {
-  font-size: 32px;
+#title-wrapper::before {
   font-weight: 600;
-  color: var(--gray-200);
+  font-size: 32px;
 }
 
-#content-wrapper.is-empty {
+#content-wrapper::before {
   font-size: 16px;
-  color: var(--gray-200);
+  line-height: 32px;
+}
+
+.icon-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.open-toggle {
+  position: absolute;
+  top: 62px;
+  left: 62px;
+  display: none;
+}
+
+.sidebar {
+  width: 400px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 32px;
+  background-color: var(--gray-800);
+  border-right: 0.5px solid var(--gray-700);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 24px;
 }

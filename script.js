@@ -4,19 +4,30 @@ const elements = {
   promptContent: document.getElementById("prompt-content"),
   titleWrapper: document.getElementById("title-wrapper"),
   contentWrapper: document.getElementById("content-wrapper"),
+  btnOpen: document.getElementById("btn-open"),
+  btnCollapse: document.getElementById("btn-collapse"),
+  sidebar: document.querySelector(".sidebar"),
 }
 
 // Atualiza o estado do wrapper conforme o conteúdo do elemento
 function updateEditableWrapperState(element, wrapper) {
-  if (!element || !wrapper) return
-  if (element.textContent.trim() === "") {
-    wrapper.classList.add("is-empty")
-  } else {
-    wrapper.classList.remove("is-empty")
-  }
+  const hasText = element.textContent.trim().length > 0
+  wrapper.classList.toggle("is-empty", !hasText)
 }
 
-// Atualiza o estado de todos os campos editáveis
+// Função para abrir a sidebar
+function openSidebar() {
+  elements.sidebar.style.display = "flex"
+  elements.btnOpen.style.display = "none"
+}
+
+// Função para fechar a sidebar
+function closeSidebar() {
+  elements.sidebar.style.display = "none"
+  elements.btnOpen.style.display = "block"
+}
+
+// Atualiza o estado de todos os elementos editáveis
 function updateAllEditableStates() {
   updateEditableWrapperState(elements.promptTitle, elements.titleWrapper)
   updateEditableWrapperState(elements.promptContent, elements.contentWrapper)
@@ -24,19 +35,26 @@ function updateAllEditableStates() {
 
 // Adiciona listeners de input para atualizar os wrappers em tempo real
 function attachAllEditableHandlers() {
-  elements.promptTitle.addEventListener("input", () => {
+  elements.promptTitle.addEventListener("input", function () {
     updateEditableWrapperState(elements.promptTitle, elements.titleWrapper)
   })
-  elements.promptContent.addEventListener("input", () => {
+  elements.promptContent.addEventListener("input", function () {
     updateEditableWrapperState(elements.promptContent, elements.contentWrapper)
   })
-  // Atualiza estado inicial
-  updateAllEditableStates()
 }
 
-// Função de inicialização
+// Inicialização
 function init() {
   attachAllEditableHandlers()
+  updateAllEditableStates()
+
+  // Estado inicial da sidebar
+  elements.sidebar.style.display = ""
+  elements.btnOpen.style.display = "none"
+
+  // Event listeners para abrir ou fechar a sidebar
+  elements.btnOpen.addEventListener("click", openSidebar)
+  elements.btnCollapse.addEventListener("click", closeSidebar)
 }
 
 // Executa a inicialização ao carregar o script
