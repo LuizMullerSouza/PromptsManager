@@ -29,7 +29,7 @@ Para validar ainda mais as habilidades demonstradas neste projeto, segue o certi
 
 ---
 
-## 🗝️ Como Testar a Aplicação
+## 🗝️ Como Utilizar a Aplicação
 
 A aplicação foi upada dentro do GitHub Pages para um acesso público, podendo ser acessado pela seguinte URL:
 
@@ -57,7 +57,13 @@ Uma visão geral de como a aplicação funciona, mostrando o fluxo principal de 
 
 Aqui está um simples Diagrama de Caso de Uso que informa como será a interação do usuário com o sistema aplicado.
 
-< DIAGRAMA EM PRODUÇÃO >
+<div align="center">
+
+| Diagrama |
+|:---:|
+| <img src="./img/diagrama-caso-de-uso.jpg" alt="Diagrama de Caso de Uso da aplicação" width="600"> |
+
+</div>
 
 ---
 
